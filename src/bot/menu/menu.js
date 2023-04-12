@@ -10,7 +10,7 @@
 
 export class Menu {
     showMenu(ctx, header, text, keys) {
-        ctx.replyWithHTML("<b>" + header + "</b>\n" + text, {
+        ctx.replyWithHTML("<b>" + header + "</b>\n\n" + text, {
             reply_markup: {
                 keyboard: 
                     keys
@@ -34,6 +34,13 @@ export class Menu {
                     out = "Включен"
                 else
                     out = "Отключен"
+                break
+
+            case "reed":
+                if (value == true)
+                    out = "Открыт"
+                else
+                    out = "Закрыт"
                 break
 
             case "temp":

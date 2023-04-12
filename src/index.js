@@ -13,9 +13,9 @@ import { cfg } from "./utils/configs.js"
 import { tgBot } from "./bot/tgbot.js"
 
 function main() {
-    log.setPath("./")
+    log.setPath("./log/")
 
-    if (!cfg.load("./tgbot.json")) {
+    if (!cfg.load("./configs/tgbot.json")) {
         log.error(logMod.INDEX, "Failed to load configs")
         return
     }

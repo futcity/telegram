@@ -16,8 +16,11 @@ import { HttpClient } from "../../../net/client.js"
 
 class ModuleHandler extends Menu {
     async process(user, ctx) {
+        const server = tgLevel.getData(user, "server")
         const building = tgLevel.getData(user, "building")
         const module = tgLevel.getData(user, "module")
+
+        const client = new HttpClient(server.proto, server.ip, server.port, server.api)
 
         const controller = hdlController.findController(building, module, ctx.message.text)
         if (controller) {
@@ -31,16 +34,20 @@ class ModuleHandler extends Menu {
          * Configure info
          */
 
-        let info = "\n"
+        let info = ""
         for (const ctrl of controllers) {
             info += "<b>" + ctrl.name.toUpperCase() + ":</b>\n"
-
-            const client = new HttpClient()
             await client.getRequest(ctrl.info.url, (resp) => {
-            for (const item of ctrl.info.fields) {
-                info += "        " + item.name + ": <b>" + this.getStrValue(resp[item.field], item.type) + "</b>\n"
-            }
-        })
+                for (const field of ctrl.info.fields) {
+                    for (const item of resp.data) {
+                        if (item.name == field.name) {
+                            info += "        " + field.alias + ": <b>" + this.getStrValue(item[field.field], field.type) + "</b>\n"
+                            break
+                        }
+                    }
+                }
+            })
+            info += "\n"
         }
 
         /*

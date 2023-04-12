@@ -25,7 +25,8 @@ class MainHandler extends Menu {
         for (const bld of hdlBuilding.getBuildings()) {
             keys.push([bld.name])
         }
-        this.showMenu(ctx, "MAIN MENU", "Hello it is main menu", keys)
+        this.showMenu(ctx, "ГЛАВНОЕ МЕНЮ",
+            "Добро пожаловать в клавное меню бота для управления умными устройствами FutureCity.\n\nВыберете объект для управления:", keys)
 
         return menuLevel.NONE
     }

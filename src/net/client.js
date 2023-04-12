@@ -9,17 +9,18 @@
 /*********************************************************************/
 
 export class HttpClient {
-    constructor(proto, ip, port) {
+    constructor(proto, ip, port, api) {
         this.proto = proto
         this.ip = ip
         this.port = port
+        this.api = api
     }
 
     async getRequest(req, resp) {
-        await fetch(req)
-        .then((response) => response.json())
-        .then((result) => {
-            resp(result)
-        })
+        await fetch(this.proto + "://" + this.ip + ":" + this.port + "/api/v" + this.api + "/" + req)
+            .then((response) => response.json())
+            .then((result) => {
+                resp(result)
+            })
     }
 }

@@ -16,9 +16,11 @@ import { log, logMod } from "../../../utils/log.js"
 
 class ControllerHandler extends Menu {
     async process(user, ctx) {
-        const client = new HttpClient()
+        const server = tgLevel.getData(user, "server")
         const building = tgLevel.getData(user, "building")
         const module = tgLevel.getData(user, "module")
+
+        const client = new HttpClient(server.proto, server.ip, server.port, server.api)
         const controller = this.findController(building, module, tgLevel.getData(user, "controller"))
 
         /*

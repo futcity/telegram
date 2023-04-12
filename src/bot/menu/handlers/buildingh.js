@@ -34,7 +34,7 @@ class BuildingHandler extends Menu {
         }
         keys.push(["Назад"])
 
-        this.showMenu(ctx, building.toUpperCase(), "Hello it is Building menu", keys)
+        this.showMenu(ctx, building.toUpperCase(), "Выберете модуль для управления:", keys)
 
         return menuLevel.NONE
     }

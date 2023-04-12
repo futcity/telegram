@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+    tgbot:
+        container_name: tgbot
+        network_mode: bridge
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./configs:./configs
+            - ./log:./log
