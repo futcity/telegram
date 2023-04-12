@@ -24,17 +24,17 @@
                                 "url": "socket?ctrl=rack",
                                 "fields": [
                                     { "alias": "Розетка 1  ", "name": "switch1", "field": "state", "type": "state" },
-                                    { "alias": "Розетка 2 ", "name": "switch2", "field": "state", "type": "state" },
-                                    { "alias": "Розетка 3 ", "name": "switch3", "field": "state", "type": "state" },
-                                    { "alias": "Розетка 4 ", "name": "switch4", "field": "state", "type": "state" }
+                                    { "alias": "Розетка 2 ",  "name": "switch2", "field": "state", "type": "state" },
+                                    { "alias": "Розетка 3 ",  "name": "switch3", "field": "state", "type": "state" },
+                                    { "alias": "Розетка 4 ",  "name": "switch4", "field": "state", "type": "state" }
                                 ]
                             },
                             "buttons": [
-                                { "name": "Розетка 1", "url": "socket/switch?ctrl=rack&name=switch1" },
-                                { "name": "Розетка 2", "url": "socket/switch?ctrl=rack&name=switch2" },
-                                { "name": "Розетка 3", "url": "socket/switch?ctrl=rack&name=switch3" },
-                                { "name": "Розетка 4", "url": "socket/switch?ctrl=rack&name=switch4" },
-                                { "name": "Назад" }
+                                [ { "name": "Розетка 1", "url": "socket/switch?ctrl=rack&name=switch1" } ],
+                                [ { "name": "Розетка 2", "url": "socket/switch?ctrl=rack&name=switch2" } ],
+                                [ { "name": "Розетка 3", "url": "socket/switch?ctrl=rack&name=switch3" } ],
+                                [ { "name": "Розетка 4", "url": "socket/switch?ctrl=rack&name=switch4" } ],
+                                [ { "name": "Обновить" }, { "name": "Назад" } ]
                             ]
                         },
                         {
@@ -43,12 +43,14 @@
                                 "url": "security?ctrl=table",
                                 "fields": [
                                     { "alias": "Статус          ", "name": "status", "field": "value", "type": "status" },
-                                    { "alias": "Ящик Стола ", "name": "box", "field": "value", "type": "reed" }
+                                    { "alias": "Сирена         ",  "name": "alarm",  "field": "value", "type": "state" },
+                                    { "alias": "",                 "name": "",       "field": "",      "type": "" },
+                                    { "alias": "Ящик Стола ",      "name": "box",    "field": "value", "type": "reed" }
                                 ]
                             },
                             "buttons": [
-                                { "name": "Статус", "url": "security/status?ctrl=table" },
-                                { "name": "Назад" }
+                                [ { "name": "Статус", "url": "security/status?ctrl=table" } ],
+                                [ { "name": "Обновить" }, { "name": "Назад" } ]
                             ]
                         }
                     ]

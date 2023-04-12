@@ -27,13 +27,15 @@ class ControllerHandler extends Menu {
          * Control of devices
          */
 
-        for (const button of controller.buttons) {
-            if (ctx.message.text == button.name) {
-                await client.getRequest(button.url, (resp) => {
-                    if (!resp.result) {
-                        log.error(logMod.CTRL_HANDLER, "Failed to get request")
-                    }
-                })
+        for (const row of controller.buttons) {
+            for (const button of row) {
+                if (ctx.message.text == button.name && ctx.message.text != "Обновить") {
+                    await client.getRequest(button.url, (resp) => {
+                        if (!resp.result) {
+                            log.error(logMod.CTRL_HANDLER, "Failed to get request")
+                        }
+                    })
+                }
             }
         }
 
@@ -44,6 +46,11 @@ class ControllerHandler extends Menu {
         let info = ""
         await client.getRequest(controller.info.url, (resp) => {
             for (const field of controller.info.fields) {
+                if (field.name == "") {
+                    info += "\n"
+                    continue
+                }
+
                 for (const item of resp.data) {
                     if (item.name == field.name) {
                         info += "        " + field.alias + ": <b>" + this.getStrValue(item[field.field], field.type) + "</b>\n"
@@ -58,8 +65,12 @@ class ControllerHandler extends Menu {
          */
 
         let keys = []
-        for (const btn of controller.buttons) {
-            keys.push([btn.name])
+        for (const row of controller.buttons) {
+            let cols = []
+            for (const col of row) {
+                cols.push(col.name)
+            }
+            keys.push(cols)
         }
 
         this.showMenu(ctx, controller.name.toUpperCase(), info, keys)

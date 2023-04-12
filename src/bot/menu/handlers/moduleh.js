@@ -39,6 +39,11 @@ class ModuleHandler extends Menu {
             info += "<b>" + ctrl.name.toUpperCase() + ":</b>\n"
             await client.getRequest(ctrl.info.url, (resp) => {
                 for (const field of ctrl.info.fields) {
+                    if (field.name == "") {
+                        info += "\n"
+                        continue
+                    }
+                    
                     for (const item of resp.data) {
                         if (item.name == field.name) {
                             info += "        " + field.alias + ": <b>" + this.getStrValue(item[field.field], field.type) + "</b>\n"
